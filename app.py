@@ -919,15 +919,22 @@ def show_realtime_dashboard(data, data_source):
         def highlight_delays(row):
             if 'departure_delay' in row and pd.notna(row['departure_delay']):
                 delay = row['departure_delay']
+                
+                # Colors that adapt automatically to light/dark theme
                 if delay <= 0:
-                    return ['background-color: #f7fcf7; color: #2c5530; font-weight: 500; border: 1px solid #c3e6cb;'] * len(row)  # Very light green
+                    # On-time/Early - Green theme adaptive
+                    return ['background: light-dark(#e8f5e8, #1b4d1b); color: light-dark(#2d5a2d, #90ee90); font-weight: bold; border-left: 4px solid light-dark(#4caf50, #00ff00);'] * len(row)
                 elif delay <= 15:
-                    return ['background-color: #fffef7; color: #856404; font-weight: 400; border: 1px solid #ffeeba;'] * len(row)  # Very light yellow
+                    # Minor delay - Yellow theme adaptive  
+                    return ['background: light-dark(#fff8e1, #4d4d1b); color: light-dark(#8a6914, #ffff90); font-weight: 500; border-left: 4px solid light-dark(#ffa726, #ffff00);'] * len(row)
                 elif delay <= 60:
-                    return ['background-color: #fff9f5; color: #b45309; font-weight: 400; border: 1px solid #fed7aa;'] * len(row)  # Very light orange
+                    # Major delay - Orange theme adaptive
+                    return ['background: light-dark(#fff2e6, #4d2d1b); color: light-dark(#bf6516, #ffb366); font-weight: 500; border-left: 4px solid light-dark(#ff9800, #ff8c00);'] * len(row)
                 else:
-                    return ['background-color: #fdf7f7; color: #721c24; font-weight: 500; border: 1px solid #f5c6cb;'] * len(row)  # Very light red
+                    # Severe delay - Red theme adaptive
+                    return ['background: light-dark(#fdeaea, #4d1b1b); color: light-dark(#a94442, #ff9999); font-weight: bold; border-left: 4px solid light-dark(#f44336, #ff4444);'] * len(row)
             return [''] * len(row)
+
 
 
 
