@@ -920,14 +920,15 @@ def show_realtime_dashboard(data, data_source):
             if 'departure_delay' in row and pd.notna(row['departure_delay']):
                 delay = row['departure_delay']
                 if delay <= 0:
-                    return ['background-color: #28a745; color: white; font-weight: bold;'] * len(row)  # Green
+                    return ['background-color: #d4edda; color: #155724; font-weight: bold; border-left: 4px solid #28a745;'] * len(row)  # Light green
                 elif delay <= 15:
-                    return ['background-color: #ffc107; color: black; font-weight: 500;'] * len(row)  # Yellow
+                    return ['background-color: #fff3cd; color: #856404; font-weight: 500; border-left: 4px solid #ffc107;'] * len(row)  # Light yellow
                 elif delay <= 60:
-                    return ['background-color: #fd7e14; color: white; font-weight: 500;'] * len(row)  # Orange
+                    return ['background-color: #ffecd1; color: #b45309; font-weight: 500; border-left: 4px solid #fd7e14;'] * len(row)  # Light orange
                 else:
-                    return ['background-color: #dc3545; color: white; font-weight: bold;'] * len(row)  # Red
+                    return ['background-color: #f8d7da; color: #721c24; font-weight: bold; border-left: 4px solid #dc3545;'] * len(row)  # Light red
             return [''] * len(row)
+
 
         # Add this function after your highlight_delays function
         def style_dataframe_responsive(df):
