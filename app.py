@@ -916,24 +916,23 @@ def show_realtime_dashboard(data, data_source):
             display_data = display_data.head(show_count)
         
         # Style the dataframe based on delays
-        def highlight_delays_inverted(row):
-            """Colors: Light for dark mode, Dark for light mode"""
+        def highlight_delays(row):
             if 'departure_delay' in row and pd.notna(row['departure_delay']):
                 delay = row['departure_delay']
                 
-                # Using CSS that automatically inverts colors based on theme
+                # Colors that adapt automatically to light/dark theme
                 if delay <= 0:
-                    # On-time: Light green for dark mode, Dark green for light mode
-                    return ['background: light-dark(#1b5e20, #81c784); color: light-dark(#ffffff, #000000); font-weight: bold; border-left: 4px solid light-dark(#2e7d32, #4caf50); padding: 8px;'] * len(row)
+                    # On-time/Early - Green theme adaptive
+                    return ['background: light-dark(#e8f5e8, #1b4d1b); color: light-dark(#2d5a2d, #90ee90); font-weight: bold; border-left: 4px solid light-dark(#4caf50, #00ff00);'] * len(row)
                 elif delay <= 15:
-                    # Minor delay: Light yellow for dark mode, Dark yellow for light mode  
-                    return ['background: light-dark(#f57f17, #fff176); color: light-dark(#ffffff, #000000); font-weight: 500; border-left: 4px solid light-dark(#fbc02d, #ffeb3b); padding: 8px;'] * len(row)
+                    # Minor delay - Yellow theme adaptive  
+                    return ['background: light-dark(#fff8e1, #4d4d1b); color: light-dark(#8a6914, #ffff90); font-weight: 500; border-left: 4px solid light-dark(#ffa726, #ffff00);'] * len(row)
                 elif delay <= 60:
-                    # Major delay: Light orange for dark mode, Dark orange for light mode
-                    return ['background: light-dark(#e65100, #ffb74d); color: light-dark(#ffffff, #000000); font-weight: 500; border-left: 4px solid light-dark(#f57c00, #ff9800); padding: 8px;'] * len(row)
+                    # Major delay - Orange theme adaptive
+                    return ['background: light-dark(#fff2e6, #4d2d1b); color: light-dark(#bf6516, #ffb366); font-weight: 500; border-left: 4px solid light-dark(#ff9800, #ff8c00);'] * len(row)
                 else:
-                    # Severe delay: Light red for dark mode, Dark red for light mode
-                    return ['background: light-dark(#c62828, #ef5350); color: light-dark(#ffffff, #000000); font-weight: bold; border-left: 4px solid light-dark(#d32f2f, #f44336); padding: 8px;'] * len(row)
+                    # Severe delay - Red theme adaptive
+                    return ['background: light-dark(#fdeaea, #4d1b1b); color: light-dark(#a94442, #ff9999); font-weight: bold; border-left: 4px solid light-dark(#f44336, #ff4444);'] * len(row)
             return [''] * len(row)
 
 
