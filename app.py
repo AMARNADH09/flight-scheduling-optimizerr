@@ -212,16 +212,6 @@ st.markdown("""
             background-color: #1a1d23 !important;
         }
     }
-        div[data-testid="stDataFrame"] > div,
-        div[data-testid="stTable"] > div {
-        background-color: var(--background-color) !important;
-        color: var(--text-color) !important;
-    }
-    
-    /* Ensure text is always visible */
-    .stDataFrame * {
-        color: inherit !important;
-    }
 
 </style>
 """, unsafe_allow_html=True)
@@ -930,14 +920,15 @@ def show_realtime_dashboard(data, data_source):
             if 'departure_delay' in row and pd.notna(row['departure_delay']):
                 delay = row['departure_delay']
                 if delay <= 0:
-                    return ['background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; font-weight: bold;'] * len(row)  # Green for on-time/early
+                    return ['background-color: #28a745; color: white; font-weight: bold;'] * len(row)  # Green
                 elif delay <= 15:
-                    return ['background: linear-gradient(135deg, #ffc107 0%, #ffdb4d 100%); color: white; font-weight: 500;'] * len(row)  # Yellow for minor
+                    return ['background-color: #ffc107; color: black; font-weight: 500;'] * len(row)  # Yellow
                 elif delay <= 60:
-                    return ['background: linear-gradient(135deg, #fd7e14 0%, #ff922b 100%); color: white; font-weight: 500;'] * len(row)  # Light red for major
+                    return ['background-color: #fd7e14; color: white; font-weight: 500;'] * len(row)  # Orange
                 else:
-                    return [' background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%); color: white; font-weight: bold;'] * len(row)  # Dark red for severe
+                    return ['background-color: #dc3545; color: white; font-weight: bold;'] * len(row)  # Red
             return [''] * len(row)
+
         # Add this function after your highlight_delays function
         def style_dataframe_responsive(df):
             """Style dataframe to work in both light and dark modes"""
