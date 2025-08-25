@@ -920,14 +920,15 @@ def show_realtime_dashboard(data, data_source):
             if 'departure_delay' in row and pd.notna(row['departure_delay']):
                 delay = row['departure_delay']
                 if delay <= 0:
-                    return ['background-color: #d4edda; color: #155724; font-weight: bold; border-left: 4px solid #28a745;'] * len(row)  # Light green
+                    return ['background-color: #e3f2fd; color: #0d47a1; font-weight: bold; border-radius: 4px;'] * len(row)  # Light blue
                 elif delay <= 15:
-                    return ['background-color: #fff3cd; color: #856404; font-weight: 500; border-left: 4px solid #ffc107;'] * len(row)  # Light yellow
+                    return ['background-color: #f3e5f5; color: #4a148c; font-weight: 500; border-radius: 4px;'] * len(row)  # Light purple
                 elif delay <= 60:
-                    return ['background-color: #ffecd1; color: #b45309; font-weight: 500; border-left: 4px solid #fd7e14;'] * len(row)  # Light orange
+                    return ['background-color: #fce4ec; color: #880e4f; font-weight: 500; border-radius: 4px;'] * len(row)  # Light pink
                 else:
-                    return ['background-color: #f8d7da; color: #721c24; font-weight: bold; border-left: 4px solid #dc3545;'] * len(row)  # Light red
+                    return ['background-color: #ffebee; color: #b71c1c; font-weight: bold; border-radius: 4px;'] * len(row)  # Light coral
             return [''] * len(row)
+
 
 
         # Add this function after your highlight_delays function
