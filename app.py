@@ -140,6 +140,89 @@ st.markdown("""
         margin-bottom: 1rem;
         text-align: center;
     }
+             /* Dark mode styles - detect Streamlit's dark theme */
+    [data-theme="dark"] .stDataFrame,
+    .stApp[data-theme="dark"] .stDataFrame,
+    html[data-theme="dark"] .stDataFrame {
+        background-color: #0e1117 !important;
+    }
+    
+    [data-theme="dark"] .stDataFrame table,
+    .stApp[data-theme="dark"] .stDataFrame table,
+    html[data-theme="dark"] .stDataFrame table {
+        background-color: #0e1117 !important;
+        color: #fafafa !important;
+        border: 1px solid #262730 !important;
+    }
+    
+    [data-theme="dark"] .stDataFrame th,
+    .stApp[data-theme="dark"] .stDataFrame th,
+    html[data-theme="dark"] .stDataFrame th {
+        background-color: #262730 !important;
+        color: #fafafa !important;
+        border: 1px solid #3d4043 !important;
+        font-weight: 600 !important;
+    }
+    
+    [data-theme="dark"] .stDataFrame td,
+    .stApp[data-theme="dark"] .stDataFrame td,
+    html[data-theme="dark"] .stDataFrame td {
+        background-color: #0e1117 !important;
+        color: #fafafa !important;
+        border: 1px solid #262730 !important;
+    }
+    
+    [data-theme="dark"] .stDataFrame tbody tr:nth-child(even),
+    .stApp[data-theme="dark"] .stDataFrame tbody tr:nth-child(even),
+    html[data-theme="dark"] .stDataFrame tbody tr:nth-child(even) {
+        background-color: #1a1d23 !important;
+    }
+    
+    [data-theme="dark"] .stDataFrame tbody tr:hover,
+    .stApp[data-theme="dark"] .stDataFrame tbody tr:hover,
+    html[data-theme="dark"] .stDataFrame tbody tr:hover {
+        background-color: #262730 !important;
+    }
+
+    /* Media query fallback for system dark mode preference */
+    @media (prefers-color-scheme: dark) {
+        .stDataFrame {
+            background-color: #0e1117 !important;
+        }
+        
+        .stDataFrame table {
+            background-color: #0e1117 !important;
+            color: #fafafa !important;
+            border: 1px solid #262730 !important;
+        }
+        
+        .stDataFrame th {
+            background-color: #262730 !important;
+            color: #fafafa !important;
+            border: 1px solid #3d4043 !important;
+        }
+        
+        .stDataFrame td {
+            background-color: #0e1117 !important;
+            color: #fafafa !important;
+            border: 1px solid #262730 !important;
+        }
+        
+        .stDataFrame tbody tr:nth-child(even) {
+            background-color: #1a1d23 !important;
+        }
+    }
+        div[data-testid="stDataFrame"] > div,
+        div[data-testid="stTable"] > div {
+        background-color: var(--background-color) !important;
+        color: var(--text-color) !important;
+    }
+    
+    /* Ensure text is always visible */
+    .stDataFrame * {
+        color: inherit !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -855,7 +938,27 @@ def show_realtime_dashboard(data, data_source):
                 else:
                     return [' background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%); color: white; font-weight: bold;'] * len(row)  # Dark red for severe
             return [''] * len(row)
-        
+        # Add this function after your highlight_delays function
+        def style_dataframe_responsive(df):
+            """Style dataframe to work in both light and dark modes"""
+            return df.style.set_table_styles([
+                {'selector': 'th', 'props': [
+                    ('background-color', 'var(--background-color)'),
+                    ('color', 'var(--text-color)'),
+                    ('font-weight', 'bold'),
+                    ('text-align', 'left'),
+                    ('padding', '12px 8px')
+                ]},
+                {'selector': 'td', 'props': [
+                    ('background-color', 'var(--background-color)'),
+                    ('color', 'var(--text-color)'),
+                    ('padding', '10px 8px'),
+                    ('border', '1px solid rgba(128,128,128,0.2)')
+                ]},
+                {'selector': 'tr:hover', 'props': [
+                    ('background-color', 'rgba(128,128,128,0.1)')
+                ]}
+            ])
         if 'departure_delay' in available_columns:
             styled_df = display_data.style.apply(highlight_delays, axis=1)
             st.dataframe(styled_df, use_container_width=True, hide_index=True)
