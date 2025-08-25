@@ -917,24 +917,18 @@ def show_realtime_dashboard(data, data_source):
         
         # Style the dataframe based on delays
         def highlight_delays(row):
-            """Colors: Light for dark mode, Dark for light mode"""
             if 'departure_delay' in row and pd.notna(row['departure_delay']):
                 delay = row['departure_delay']
-                
-                # Using CSS that automatically inverts colors based on theme
                 if delay <= 0:
-                    # On-time: Light green for dark mode, Dark green for light mode
-                    return ['background: light-dark(#1b5e20, #81c784); color: light-dark(#ffffff, #000000); font-weight: bold; border-left: 4px solid light-dark(#2e7d32, #4caf50); padding: 8px;'] * len(row)
+                    return ['background-color: #f0f9f0; color: #2e7d2e; font-weight: 600; box-shadow: inset 3px 0 0 #4caf50;'] * len(row)  # Mint green
                 elif delay <= 15:
-                    # Minor delay: Light yellow for dark mode, Dark yellow for light mode  
-                    return ['background: light-dark(#f57f17, #fff176); color: light-dark(#ffffff, #000000); font-weight: 500; border-left: 4px solid light-dark(#fbc02d, #ffeb3b); padding: 8px;'] * len(row)
+                    return ['background-color: #fffbf0; color: #b8860b; font-weight: 500; box-shadow: inset 3px 0 0 #ffa726;'] * len(row)  # Cream yellow
                 elif delay <= 60:
-                    # Major delay: Light orange for dark mode, Dark orange for light mode
-                    return ['background: light-dark(#e65100, #ffb74d); color: light-dark(#ffffff, #000000); font-weight: 500; border-left: 4px solid light-dark(#f57c00, #ff9800); padding: 8px;'] * len(row)
+                    return ['background-color: #fff5f0; color: #cc5500; font-weight: 500; box-shadow: inset 3px 0 0 #ff9800;'] * len(row)  # Peach orange
                 else:
-                    # Severe delay: Light red for dark mode, Dark red for light mode
-                    return ['background: light-dark(#c62828, #ef5350); color: light-dark(#ffffff, #000000); font-weight: bold; border-left: 4px solid light-dark(#d32f2f, #f44336); padding: 8px;'] * len(row)
+                    return ['background-color: #fff0f0; color: #cc2936; font-weight: 600; box-shadow: inset 3px 0 0 #f44336;'] * len(row)  # Soft coral
             return [''] * len(row)
+
 
 
 
