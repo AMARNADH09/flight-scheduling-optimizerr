@@ -1,4 +1,3 @@
-#  Mumbai Airport Flight Scheduler - FlightRadar24 Integration
 
 <div align=" center\>
 
@@ -18,7 +17,15 @@
 </div>
 
 ---
+## Live demo
 
+A **working public demo** is now available:
+
+**https://flight-scheduling-optimizer.streamlit.app/**
+
+> This link is confirmed working — users can experience the dashboard live. If you deploy elsewhere, remember to update or replace this URL.
+
+---
 ## **What This Project Does**
 
 > **Transform Mumbai Airport Operations with AI-Powered Intelligence** 
