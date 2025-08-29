@@ -22,7 +22,7 @@ The Mumbai Airport Flight Scheduler is a comprehensive, AI-driven application de
 
 ##  Installation
 
-`ash
+`Bash
 pip install -r requirements.txt
 streamlit run app.py
 `
